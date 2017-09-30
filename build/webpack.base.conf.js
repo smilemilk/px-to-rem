@@ -2,9 +2,15 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
+}
+
+const px2remQuery = {
+  basePx: 20,
+  min: 2
 }
 
 module.exports = {
@@ -28,6 +34,38 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        include: [resolve('src/components'),resolve('src/App.vue')],
+        options: vueLoaderConfig
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          use: [{
+            loader: 'css-loader'
+          },{
+            loader: 'webpack-px-to-rem',
+            options: px2remQuery
+          }],
+          fallback: 'style-loader'
+        })
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          use: [{
+            loader: 'css-loader'
+          },{
+            loader: 'sass-loader'
+          },{
+            loader: 'webpack-px-to-rem',
+            options: px2remQuery
+          }],
+          fallback: 'style-loader'
+        })
+      },
+      {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
@@ -36,11 +74,7 @@ module.exports = {
           formatter: require('eslint-friendly-formatter')
         }
       },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
-      },
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -73,3 +107,7 @@ module.exports = {
     ]
   }
 }
+
+
+
+

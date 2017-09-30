@@ -13,7 +13,7 @@ exports.cssLoaders = function (options) {
   options = options || {}
 
   var cssLoader = {
-    loader: 'css-loader',
+    loader: 'css-loader!sass-loader!webpack-px-to-rem?basePx=10 && min=2',
     options: {
       minimize: process.env.NODE_ENV === 'production',
       sourceMap: options.sourceMap

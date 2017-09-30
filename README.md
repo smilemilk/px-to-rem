@@ -1,6 +1,6 @@
 # px to rem
 
-> use webpack-px-to-rem for a demo
+> webpack-px-to-rem + scss-loader + vue-cli
 
 ## 配置
 
@@ -20,5 +20,5 @@ npm run build --report
 ```
 ## 链接
 
-webpack-px-to-rem <a href='https://www.npmjs.com/package/webpack-px-to-rem'>使用说明</a>
+> webpack-px-to-rem <a href='https://www.npmjs.com/package/webpack-px-to-rem'>使用说明</a>
 
